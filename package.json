@@ -1,0 +1,26 @@
+{
+    "name": "forthel",
+    "displayName": "ForTheL",
+    "description": "Language support for the ForTheL language.",
+    "version": "0.0.1",
+    "publisher": "EdAyers",
+    "engines": {
+        "vscode": "^1.28.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "forthel",
+            "aliases": ["ForTheL", "forthel"],
+            "extensions": [".ftl"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "forthel",
+            "scopeName": "source.ftl",
+            "path": "./syntaxes/forthel.tmLanguage.json"
+        }]
+    }
+}

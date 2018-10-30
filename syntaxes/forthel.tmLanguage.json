@@ -1,0 +1,58 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "ForTheL",
+	"patterns": [
+		{"include": "#comments"},
+		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#strings"
+		},
+		{"include" : "#tokenGroup"}
+	],
+	"repository": {
+		"hashComment": {
+			"begin": "(#)", "end": "$",
+			"beginCaptures": {"0": {"name": "punctuation.definition.comment.ftl"}},
+			"name": "comment.line.hash.ftl",
+			"patterns": []
+		},
+		"comments" : {
+			"patterns": [
+				{"include": "#hashComment"}
+			]
+		},
+		"tokenGroup" : {
+			"name" : "entity.name.ftl",
+			"begin" : "\\[",
+			"beginCaptures" : {"0":{"name":"keyword.other.ftl"}},
+			"end":"\\]",
+			"endCaptures" : {"0":{"name":"keyword.other.ftl"}},
+			"patterns": [
+				{
+					"name":"keyword.other.ftl",
+					"match": "\/"
+				}
+			]
+		},
+		"keywords": {
+			"patterns": [{
+				"name": "keyword.other.header.ftl",
+				"match": "\\b(Axiom|Definition|Theorem|Let|Axiom)\\b"
+			}]
+		},
+		"strings": {
+			"name": "string.quoted.double.forthel",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"name": "constant.character.escape.forthel",
+					"match": "\\\\."
+				}
+			]
+		}
+	},
+	"scopeName": "source.ftl"
+}
