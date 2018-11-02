@@ -11,16 +11,29 @@
         "Programming Languages"
     ],
     "contributes": {
-        "languages": [{
-            "id": "forthel",
-            "aliases": ["ForTheL", "forthel"],
-            "extensions": [".ftl"],
-            "configuration": "./language-configuration.json"
-        }],
-        "grammars": [{
-            "language": "forthel",
-            "scopeName": "source.ftl",
-            "path": "./syntaxes/forthel.tmLanguage.json"
-        }]
+        "languages": [
+            {
+                "id": "forthel",
+                "aliases": [
+                    "ForTheL",
+                    "forthel"
+                ],
+                "extensions": [
+                    ".ftl"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "forthel",
+                "scopeName": "source.ftl",
+                "path": "./syntaxes/forthel.tmLanguage.json"
+            }
+        ]
+    },
+    "devDependencies": {
+        "@types/node": "^10.12.2",
+        "vscode": "^1.1.21"
     }
 }
