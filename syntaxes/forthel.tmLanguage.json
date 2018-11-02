@@ -3,12 +3,9 @@
 	"name": "ForTheL",
 	"patterns": [
 		{"include": "#comments"},
-		{
-			"include": "#keywords"
-		},
-		{
-			"include": "#strings"
-		},
+		{"include": "#keywords"},
+		{"include": "#strings"},
+		{"include": "#header"},
 		{"include" : "#tokenGroup"}
 	],
 	"repository": {
@@ -25,7 +22,7 @@
 		},
 		"tokenGroup" : {
 			"name" : "entity.name.ftl",
-			"begin" : "\\[",
+			"begin" : "^\\[",
 			"beginCaptures" : {"0":{"name":"keyword.other.ftl"}},
 			"end":"\\]",
 			"endCaptures" : {"0":{"name":"keyword.other.ftl"}},
@@ -36,10 +33,24 @@
 				}
 			]
 		},
+		"header": {
+			"name" : "entity.name.function.ftl",
+			"begin":"^\\s*(Axiom|Definition|Theorem|Axiom|Signature|Proposition)\\b",
+			"beginCaptures" : {"0":{"name":"keyword.other.ftl"}},
+			"end" : "(\\.)",
+			"endCaptures":{"0":{"name":"punctuation.terminator.ftl"}},
+			"patterns": [
+				
+			]
+		},
 		"keywords": {
 			"patterns": [{
 				"name": "keyword.other.header.ftl",
-				"match": "\\b(Axiom|Definition|Theorem|Let|Axiom)\\b"
+				"match": "\\b(Let)\\b"
+			},
+			{
+				"name": "keyword.control.proof.ftl",
+				"match": "\\b(Proof|qed|Qed|proof)\\b"
 			}]
 		},
 		"strings": {
