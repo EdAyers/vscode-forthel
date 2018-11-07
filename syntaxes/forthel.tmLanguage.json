@@ -1,69 +1,68 @@
 {
-	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-	"name": "ForTheL",
-	"patterns": [
-		{"include": "#comments"},
-		{"include": "#keywords"},
-		{"include": "#strings"},
-		{"include": "#header"},
-		{"include" : "#tokenGroup"}
-	],
-	"repository": {
-		"hashComment": {
-			"begin": "(#)", "end": "$",
-			"beginCaptures": {"0": {"name": "punctuation.definition.comment.ftl"}},
-			"name": "comment.line.hash.ftl",
-			"patterns": []
-		},
-		"comments" : {
-			"patterns": [
-				{"include": "#hashComment"}
-			]
-		},
-		"tokenGroup" : {
-			"name" : "entity.name.ftl",
-			"begin" : "^\\[",
-			"beginCaptures" : {"0":{"name":"keyword.other.ftl"}},
-			"end":"\\]",
-			"endCaptures" : {"0":{"name":"keyword.other.ftl"}},
-			"patterns": [
-				{
-					"name":"keyword.other.ftl",
-					"match": "\/"
-				}
-			]
-		},
-		"header": {
-			"name" : "entity.name.function.ftl",
-			"begin":"^\\s*(Axiom|Definition|Theorem|Axiom|Signature|Proposition)\\b",
-			"beginCaptures" : {"0":{"name":"keyword.other.ftl"}},
-			"end" : "(\\.)",
-			"endCaptures":{"0":{"name":"punctuation.terminator.ftl"}},
-			"patterns": [
-				
-			]
-		},
-		"keywords": {
-			"patterns": [{
-				"name": "keyword.other.header.ftl",
-				"match": "\\b(Let)\\b"
-			},
-			{
-				"name": "keyword.control.proof.ftl",
-				"match": "\\b(Proof|qed|Qed|proof)\\b"
-			}]
-		},
-		"strings": {
-			"name": "string.quoted.double.forthel",
-			"begin": "\"",
-			"end": "\"",
-			"patterns": [
-				{
-					"name": "constant.character.escape.forthel",
-					"match": "\\\\."
-				}
-			]
-		}
-	},
-	"scopeName": "source.ftl"
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "ForTheL",
+  "patterns": [
+    { "include": "#comments" },
+    { "include": "#keywords" },
+    { "include": "#strings" },
+    { "include": "#header" },
+    { "include": "#tokenGroup" }
+  ],
+  "repository": {
+    "hashComment": {
+      "begin": "(#)",
+      "end": "$",
+      "beginCaptures": { "0": { "name": "punctuation.definition.comment.ftl" } },
+      "name": "comment.line.hash.ftl",
+      "patterns": []
+    },
+    "comments": {
+      "patterns": [{ "include": "#hashComment" }]
+    },
+    "tokenGroup": {
+      "name": "entity.name.ftl",
+      "begin": "^\\[",
+      "beginCaptures": { "0": { "name": "keyword.other.ftl" } },
+      "end": "\\]",
+      "endCaptures": { "0": { "name": "keyword.other.ftl" } },
+      "patterns": [
+        {
+          "name": "keyword.other.ftl",
+          "match": "/"
+        }
+      ]
+    },
+    "header": {
+      "name": "entity.name.function.ftl",
+      "begin": "^\\s*(Axiom|Definition|Theorem|Signature|Proposition|Lemma)\\b",
+      "beginCaptures": { "0": { "name": "keyword.other.ftl" } },
+      "end": "(\\.)",
+      "endCaptures": { "0": { "name": "punctuation.terminator.ftl" } },
+      "patterns": []
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.other.header.ftl",
+          "match": "\\b(Let)\\b"
+        },
+        {
+          "name": "keyword.control.proof.ftl",
+          "match": "\\b(Proof|qed|Qed|proof)\\b"
+        }
+      ]
+    },
+    "strings": {
+      "name": "string.quoted.double.forthel",
+      "begin": "\"",
+      "end": "\"",
+      "patterns": [
+        {
+          "name": "constant.character.escape.forthel",
+          "match": "\\\\."
+        }
+      ]
+    }
+  },
+  "scopeName": "source.ftl"
 }

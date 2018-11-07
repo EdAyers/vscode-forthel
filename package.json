@@ -1,39 +1,211 @@
 {
-    "name": "forthel",
-    "displayName": "ForTheL",
-    "description": "Language support for the ForTheL language.",
-    "version": "0.0.1",
-    "publisher": "EdAyers",
-    "engines": {
-        "vscode": "^1.28.0"
-    },
-    "categories": [
-        "Programming Languages"
-    ],
-    "contributes": {
-        "languages": [
-            {
-                "id": "forthel",
-                "aliases": [
-                    "ForTheL",
-                    "forthel"
-                ],
-                "extensions": [
-                    ".ftl"
-                ],
-                "configuration": "./language-configuration.json"
-            }
+  "name": "vscode-hie-server",
+  "displayName": "Haskell Language Server",
+  "description": "Language Server Protocol for Haskell via HIE",
+  "version": "0.0.24",
+  "license": "MIT",
+  "publisher": "alanz",
+  "engines": {
+    "vscode": "^1.25.0"
+  },
+  "keywords": [
+    "language",
+    "haskell",
+    "lsp",
+    "multi-root ready"
+  ],
+  "homepage": "https://github.com/alanz/vscode-hie-server",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alanz/vscode-hie-server.git"
+  },
+  "bugs": {
+    "url": "https://github.com/alanz/vscode-hie-server/issues"
+  },
+  "categories": [
+    "Programming Languages",
+    "Formatters",
+    "Linters",
+    "Other"
+  ],
+  "icon": "images/HIE_logo_128.png",
+  "galleryBanner": {
+    "color": "#22172A",
+    "theme": "dark"
+  },
+  "activationEvents": [
+    "onLanguage:forthel"
+  ],
+  "main": "./out/src/extension",
+  "contributes": {
+    "languages": [
+      {
+        "id": "forthel",
+        "aliases": [
+          "ForTheL",
+          "forthel"
         ],
-        "grammars": [
-            {
-                "language": "forthel",
-                "scopeName": "source.ftl",
-                "path": "./syntaxes/forthel.tmLanguage.json"
-            }
-        ]
+        "extensions": [
+          ".ftl"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "ForTheL Language Server",
+      "properties": {
+        "languageServerForthel.maxNumberOfProblems": {
+          "scope": "resource",
+          "type": "number",
+          "default": 100,
+          "description": "Controls the maximum number of problems produced by the server."
+        },
+        "languageServerForthel.showTypeForSelection.onHover": {
+          "scope": "resource",
+          "type": "boolean",
+          "default": true,
+          "description": "If true, when an expression is selected, the hover tooltip will attempt to display the type of the entire expression - rather than just the term under the cursor."
+        },
+        "languageServerForthel.showTypeForSelection.command.location": {
+          "scope": "resource",
+          "type": "string",
+          "enum": [
+            "dropdown",
+            "channel"
+          ],
+          "default": "dropdown",
+          "description": "Determines where the type information for selected text will be shown when the `showType` command is triggered (distinct from automatically showing this information when hover is triggered).\ndropdown: in a dropdown\nchannel: will be revealed in an output channel"
+        },
+        "languageServerForthel.trace.server": {
+          "scope": "resource",
+          "type": "string",
+          "enum": [
+            "off",
+            "messages",
+            "verbose"
+          ],
+          "default": "off",
+          "description": "Traces the communication between VSCode and the languageServerForthel service."
+        },
+        "languageServerForthel.enable": {
+          "scope": "resource",
+          "type": "boolean",
+          "default": true,
+          "description": "Enable/disable the server (useful for multi-root workspaces)."
+        }
+      }
     },
-    "devDependencies": {
-        "@types/node": "^10.12.2",
-        "vscode": "^1.1.21"
-    }
+    "commands": [
+      {
+        "command": "forthel.commands.demoteDef",
+        "title": "Haskell: Demote Definition",
+        "description": "Move a definition one level down"
+      },
+      {
+        "command": "forthel.commands.liftOneLevel",
+        "title": "Haskell: Lift One Level",
+        "description": "Move definition one level up from where it is now"
+      },
+      {
+        "command": "forthel.commands.liftTopLevel",
+        "title": "Haskell: Lift to Top Level",
+        "description": "Move a definition to the top level"
+      },
+      {
+        "command": "forthel.commands.genApplicative",
+        "title": "Haskell: Generalize Applicative",
+        "description": "Generalize a monadic function to use applicative"
+      },
+      {
+        "command": "forthel.commands.deleteDef",
+        "title": "Haskell: Delete Definition",
+        "description": "Deletes a definition"
+      },
+      {
+        "command": "forthel.commands.insertType",
+        "title": "Haskell: Insert type",
+        "description": "Insert type for the expression"
+      },
+      {
+        "command": "forthel.commands.showType",
+        "title": "Haskell: Show type",
+        "description": "Show type for the expression"
+      },
+      {
+        "command": "forthel.commands.caseSplit",
+        "title": "Haskell: Split case",
+        "description": "Generate pattern matches for the identifier under the cursor"
+      },
+      {
+        "command": "forthel.commands.importIdentifier",
+        "title": "Haskell: Import identifier",
+        "description": "Imports a function or type based on a Hoogle search"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "forthel.commands.showType",
+        "key": "ctrl+alt+t",
+        "mac": "cmd+alt+t",
+        "when": "editorTextFocus"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "when": "resourceLangId == haskell",
+          "command": "forthel.commands.demoteDef"
+        }
+      ],
+      "editor/context": [
+        {
+          "when": "resourceLangId == haskell",
+          "command": "forthel.commands.demoteDef",
+          "group": "HaRe@1"
+        }
+      ]
+    },
+    "grammars": [
+      {
+        "language": "forthel",
+        "scopeName": "source.ftl",
+        "path": "./syntaxes/forthel.tmLanguage.json"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile && npm run tslint",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "test": "npm run compile && node ./node_modules/vscode/bin/test",
+    "tslint": "tslint -p tsconfig.json -c tslint.json --format stylish 'src/**/*.ts'",
+    "tslint-fix": "tslint --fix -p tsconfig.json  -c tslint.json --format stylish 'src/**/*.ts'",
+    "push-tag": "git tag -a $npm_package_version -m \"Version $npm_package_version\" && git push origin $npm_package_version"
+  },
+  "devDependencies": {
+    "@types/mocha": "^2.2.46",
+    "@types/node": "^8.5.8",
+    "husky": "^0.14.3",
+    "prettier": "1.11.1",
+    "pretty-quick": "^1.4.1",
+    "tslint": "^5.9.1",
+    "typescript": "^2.8.1",
+    "vscode": "^1.1.14"
+  },
+  "dependencies": {
+    "@types/cheerio": "^0.22.7",
+    "@types/js-yaml": "^3.11.1",
+    "@types/lodash": "^4.14.109",
+    "@types/lru-cache": "^4.1.0",
+    "@types/request-promise-native": "^1.0.14",
+    "cheerio": "^1.0.0-rc.2",
+    "js-yaml": "^3.11.0",
+    "lodash": "^4.17.10",
+    "lru-cache": "^4.1.3",
+    "request": "^2.86.0",
+    "request-promise-native": "^1.0.5",
+    "vscode-languageclient": "^4.4.0"
+  }
 }

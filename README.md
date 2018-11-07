@@ -1,31 +1,37 @@
-# VSCode ForTheL language support
+# SAD Language Client.
 
-ForTheL is the "Formal Theory Language" developed by Andrei Paskevich and used in the SAD theorem prover.
-This extension gives some basic language support for `.ftl` files.
+This is based on the Haskell Language Server Client, but has been adjusted to work with my modified version of `SAD` instead.
+This is very much an experimental prototype at the moment so don't expect in the marketplace any time soon.
 
-## Features
+## Prereqs
 
-- Simple syntax highlighting for block headers and comments.
-- That's it.
+You need to install my special version of SAD which can speak VSCode's LSP.
 
-<!-- ## Requirements
+```sh
+git clone https://github.com/EdAyers/SAD3.git
+cd SAD3
+stack install
+# this should put an executable`~/.local/bin/SAD`. If it doesn't then you will need to set the `executablePath` config.
+```
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+## Build
 
-## Extension Settings
+```
+npm i
+```
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+I just open this project in vscode and hit F5.
 
-For example:
+[TODO] Add proper build instructions.
 
-This extension contributes the following settings:
+## Behaviour
 
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
-  -->
-## Release Notes
+Open a `ForTheL` file and you should see:
+- syntax highlighting
+- on save, if it can find SAD, it will run it's parser and let you know what the error messages are.
+- 
 
-### 0.0.1
+## TODOs
 
-- Added syntax highlighting
-- Added comments support `#`
+- Reintroduce the sophisticated executable finder that looks at the value of `which SAD`.
+- `SAD` should have a `--version` flag so that this extension can check it has a version compatible with LSP.
